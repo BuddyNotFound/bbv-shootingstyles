@@ -23,7 +23,7 @@ body {
     border-radius: 0.5vw;
 }
   
-  .top {
+.top {
     position: absolute;
     top: -6px;
     border-bottom: 0.3vw solid white;

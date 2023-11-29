@@ -8,8 +8,6 @@ client_scripts {
     'main.lua',
 }
 
-lua54 'yes'
-
 ui_page('html/index.html')
       
 files {
@@ -18,6 +16,4 @@ files {
     'html/style.css',
 }
 
-shared_scripts {
-    'config.lua',
-}
+lua54 'yes'

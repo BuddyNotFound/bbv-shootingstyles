@@ -6,7 +6,6 @@ Main = {
     },
 }
 
-RegisterCommand('s_test',function(source,args) Main:WeaponStyle(args[1]) end)
 RegisterCommand('s_anim',function(source,args) Main:OpenStyles() end)
 RegisterKeyMapping("s_anim","Select shooting style","keyboard","F5")
 RegisterNUICallback("exit" ,function(data,cb) SetNuiFocus(false,false) Main.open = false end)
