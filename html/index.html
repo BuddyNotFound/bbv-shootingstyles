@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shooting Styles</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.staticaly.com/gh/hung1001/font-awesome-pro/4cac1a6/css/all.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+.button {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(#ffffff24, rgb(255 0 200 / 33%), #ffffff00);
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire button */
+}
+
+.button:hover {
+    background: linear-gradient(#ffffff24, rgb(255 0 200 / 63%), #ffffff00);
+    animation: colorChangeAnimation 0.3s ease-in-out; /* Add animation effect on hover */
+}
+
+@keyframes colorChangeAnimation {
+    0% {
+        background: linear-gradient(#ffffff24, rgb(255 0 200 / 33%), #ffffff00);
+    }
+    25% {
+        background: linear-gradient(#ffffff24, rgb(255 0 200 / 43%), #ffffff00);
+    }
+    50% {
+        background: linear-gradient(#ffffff24, rgb(255 0 200 / 53%), #ffffff00);
+    }
+    75% {
+        background: linear-gradient(#ffffff24, rgb(255 0 200 / 63%), #ffffff00);
+    }
+    100% {
+        background: linear-gradient(#ffffff24, rgb(255 0 200 / 73%), #ffffff00);
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container" style="display: none; align-items: center; justify-content: center;">
+        <div class="top">
+            <i class="far fa-portal-exit salir"></i>
+            <i class="far fa-trash-alt matar"></i>
+            <img src="https://cdn.discordapp.com/attachments/1118576885358661815/1178455936017383588/a7528aee78133240cf0c7fb9488c3bf6b909cea5.png?ex=6576359d&is=6563c09d&hm=835383f39cbf1380758d0c66551536f8ff76c1e64e00601e19d40fc446b544a6&" alt="">
+        </div>
+        <button class="button">
+            <img src="https://cdn.discordapp.com/attachments/1133534812704079964/1178475911461470340/Untitled-1.png?ex=65764838&is=6563d338&hm=65acf3bbfa810af5bcc4b566671939036f6537a72cbf0ae3aa342f687f16d756&" alt="Left Button">
+        </button>
+        <button class="button">
+            <img src="https://cdn.discordapp.com/attachments/1133534812704079964/1178483396356345866/Untitled-1.png?ex=65764f30&is=6563da30&hm=7d20584b303c1841287b950107ee42c458dcef1eba7b06d60466562adb903578&" alt="Middle Button">
+        </button>
+        <button class="button">
+            <img src="https://cdn.discordapp.com/attachments/1133534812704079964/1178479187976274010/Untitled-1.png?ex=65764b45&is=6563d645&hm=734adc535d80e1457a6a27337aa4e600594d7de60160c83d3b07a278aa8af7ba&" alt="Right Button">
+        </button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var container = $(".container");
+    
+            // Function to handle button clicks
+            function handleButtonClick(buttonNumber) {
+                $.post('https://bbv-shootingstyles/changestyle', JSON.stringify({
+                    style: buttonNumber                
+                }));
+            }
+    
+            // Button click events
+            $(".button:eq(0)").click(function () {
+                handleButtonClick(1);
+            });
+    
+            $(".button:eq(1)").click(function () {
+                handleButtonClick(2);
+            });
+    
+            $(".button:eq(2)").click(function () {
+                handleButtonClick(3);
+            });
+    
+            container.mousedown(function (e) {
+                var offsetX = e.pageX - container.offset().left;
+                var offsetY = e.pageY - container.offset().top;
+    
+                // Change cursor style to "grabbing" while dragging
+                container.css("cursor", "grabbing");
+    
+                $(document).mousemove(function (e) {
+                    container.offset({
+                        top: e.pageY - offsetY,
+                        left: e.pageX - offsetX
+                    });
+                });
+    
+                $(document).mouseup(function () {
+                    $(document).off("mousemove mouseup");
+    
+                    // Reset cursor style after dragging
+                    container.css("cursor", "auto");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
